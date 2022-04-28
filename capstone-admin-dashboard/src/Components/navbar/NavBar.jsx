@@ -6,7 +6,7 @@ export default function NavBar() {
   return (
     <div className="topbar">
       <div className="topbarWrapper">
-        <div className="topLeft">
+        <div className="topLeft text-center">
           <span className="logo">Gebya Shop Admin</span>
         </div>
         <div className="topRight">
