@@ -2,14 +2,14 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import { login } from "../../redux/apiCall"
+import { login } from "../../redux/apiCalls"
 
 import { mobile } from "../../Responsive/responsive"
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") center;
+  background: black;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -60,32 +60,33 @@ const Link = styled.a`
   text-decoration: underline;
   cursor: pointer;
 `
-const Error = styled.span`
-  color: red;
-`
+// const Error = styled.span`
+//   color: red;
+// `
 const Login = () => {
+  console.log("wyooooooooooooooooooo")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate()
 
   const dispatch = useDispatch()
-  const { isFetching, error } = useSelector((state) => state.user)
+  //   const { isFetching, error } = useSelector((state) => state.user)
   const handleLogin = (e) => {
     e.preventDefault()
     login(dispatch, { email, password })
+    // setAdmin(true)
     navigate("/")
   }
   return (
     <Container>
       <Wrapper>
+        <Title>ADMIN DASHBOARD</Title>
         <Title>SIGN IN</Title>
         <Form>
           <Input placeholder="email" onChange={(e) => setEmail(e.target.value)} />
           <Input placeholder="password" onChange={(e) => setPassword(e.target.value)} />
-          <Button onClick={handleLogin} disabled={isFetching}>
-            LOGIN
-          </Button>
-          {error && <Error>Something went wrong...</Error>}
+          <Button onClick={handleLogin}>LOGIN</Button>
+          {/* {error && <Error>Something went wrong...</Error>} */}
           {/* <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link> */}
 
           <Link>CREATE A NEW ACCOUNT</Link>
