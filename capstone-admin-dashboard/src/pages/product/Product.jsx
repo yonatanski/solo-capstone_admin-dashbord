@@ -47,7 +47,7 @@ export default function Product() {
         </div>
         <div className="productTopRight">
           <div className="productInfoTop">
-            <img src={product.img} alt="" className="productInfoImg" />
+            <img src={product.img[0]} alt="" className="productInfoImg" />
             <span className="productName text-dark">{product.title}</span>
           </div>
           <div className="productInfoBottom">
@@ -87,7 +87,7 @@ export default function Product() {
           </div>
           <div className="productFormRight">
             <div className="productUpload">
-              <img src={product.img} alt="" className="productUploadImg" />
+              <img src={product.img[0]} alt="" className="productUploadImg" />
               <label for="file">
                 <Publish />
               </label>
