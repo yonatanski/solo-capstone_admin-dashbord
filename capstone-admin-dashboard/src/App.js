@@ -13,6 +13,7 @@ import NewProduct from "./pages/newProduct/NewProduct"
 import Login from "./pages/login/Login"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import Anncoucment from "./pages/Anncoucment/Anncoucment"
 
 function App() {
   // const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin
@@ -66,6 +67,7 @@ function App() {
               <Route path="/product/:productId" exact element={<Product />} />
 
               <Route path="/newproduct" exact element={<NewProduct />} />
+              <Route path="/anncoucnemnt" exact element={<Anncoucment />} />
             </Routes>
           </div>
         </>

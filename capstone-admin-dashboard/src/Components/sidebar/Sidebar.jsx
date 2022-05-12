@@ -1,8 +1,9 @@
 import "./sidebar.css"
 import { LineStyle, Timeline, TrendingUp, PermIdentity, Storefront, AttachMoney, BarChart, MailOutline, DynamicFeed, ChatBubbleOutline, WorkOutline, Report } from "@material-ui/icons"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 export default function Sidebar() {
+  const location = useLocation()
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -10,16 +11,16 @@ export default function Sidebar() {
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
             <Link to="/" className="link">
-              <li className="sidebarListItem active">
+              <li className={"sidebarListItem" + (location.pathname === "/" ? " active" : "")}>
                 <LineStyle className="sidebarIcon" />
                 Home
               </li>
             </Link>
-            <li className="sidebarListItem">
+            <li className={"sidebarListItem" + (location.pathname === "/analytics" ? " active" : "")}>
               <Timeline className="sidebarIcon" />
               Analytics
             </li>
-            <li className="sidebarListItem">
+            <li className={"sidebarListItem" + (location.pathname === "/sales" ? " active" : "")}>
               <TrendingUp className="sidebarIcon" />
               Sales
             </li>
@@ -29,24 +30,30 @@ export default function Sidebar() {
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
             <Link to="/users" className="link">
-              <li className="sidebarListItem">
+              <li className={"sidebarListItem" + (location.pathname === "/users" ? " active" : "")}>
                 <PermIdentity className="sidebarIcon" />
                 Users
               </li>
             </Link>
             <Link to="/products" className="link">
-              <li className="sidebarListItem">
+              <li className={"sidebarListItem" + (location.pathname === "/products" ? " active" : "")}>
                 <Storefront className="sidebarIcon" />
                 Products
               </li>
             </Link>
-            <Link to="/products" className="link">
-              <li className="sidebarListItem">
+            <Link to="/orders" className="link">
+              <li className={"sidebarListItem" + (location.pathname === "/orders" ? " active" : "")}>
                 <Storefront className="sidebarIcon" />
                 Orders
               </li>
             </Link>
-            <li className="sidebarListItem">
+            <Link to="/anncoucnemnt" className="link">
+              <li className={"sidebarListItem" + (location.pathname === "/anncoucnemnt" ? " active" : "")}>
+                <Storefront className="sidebarIcon" />
+                Anncoucment
+              </li>
+            </Link>
+            <li className={"sidebarListItem" + (location.pathname === "/transction" ? " active" : "")}>
               <AttachMoney className="sidebarIcon" />
               Transactions
             </li>
@@ -73,7 +80,7 @@ export default function Sidebar() {
             </li>
           </ul>
         </div>
-        <div className="sidebarMenu">
+        {/* <div className="sidebarMenu">
           <h3 className="sidebarTitle">Staff</h3>
           <ul className="sidebarList">
             <li className="sidebarListItem">
@@ -90,6 +97,7 @@ export default function Sidebar() {
             </li>
           </ul>
         </div>
+         */}
       </div>
     </div>
   )
