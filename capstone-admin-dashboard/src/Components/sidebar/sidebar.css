@@ -33,9 +33,13 @@
     border-radius: 10px;
   }
   
-  .sidebarListItem.active,
+
   .sidebarListItem:hover {
-    background-color: rgb(240, 240, 255);
+   
+    background-color: rgba(235, 235, 245, 0.942);
+  }
+  .sidebarListItem.active {
+    background-color: rgba(225, 225, 239, 0.942);
   }
   
   .sidebarIcon{

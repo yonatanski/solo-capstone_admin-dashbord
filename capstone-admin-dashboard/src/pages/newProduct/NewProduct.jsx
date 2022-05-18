@@ -7,6 +7,8 @@ import "./newProduct.css"
 
 export default function NewProduct() {
   const [newproduct, setNewproduct] = useState({})
+  const [title, setTitle] = useState("")
+  const [desc, setDesc] = useState("")
   const [category, setCategory] = useState([])
   const [size, setSize] = useState([])
   const [color, setColor] = useState([])
@@ -19,14 +21,24 @@ export default function NewProduct() {
       return { ...prev, [e.target.name]: e.target.value }
     })
   }
+  const handleTitleChange = (e) => {
+    setTitle((prev) => {
+      return { ...prev, [e.target.name]: e.target.value.replace(/(\r\n|\n|\r)/gm, "") }
+    })
+  }
+  const handleDescriptionChange = (e) => {
+    setDesc((prev) => {
+      return { ...prev, [e.target.name]: e.target.value.replace(/(\r\n|\n|\r)/gm, "") }
+    })
+  }
   const handleCategory = (e) => {
-    setCategory(e.target.value.split(","))
+    setCategory(e.target.value.toLowerCase().split(","))
   }
   const handleSize = (e) => {
-    setSize(e.target.value.split(","))
+    setSize(e.target.value.toUpperCase().split(","))
   }
   const handleColor = (e) => {
-    setColor(e.target.value.split(","))
+    setColor(e.target.value.toUpperCase().split(","))
   }
   const handleClick = async (e) => {
     e.preventDefault()
@@ -47,7 +59,7 @@ export default function NewProduct() {
       // }
       const response = await axios({
         method: "post",
-        url: "http://localhost:3010/api/products/uploadProductImg",
+        url: "http://localhost:3050/api/products/uploadProductImg",
         data: formData,
 
         Headers: {
@@ -56,7 +68,7 @@ export default function NewProduct() {
         },
       })
       console.log(response.data)
-      const product = { ...newproduct, categories: category, size, color, img: response.data.img }
+      const product = { ...newproduct, title: title.title, desc: desc.desc, categories: category, size, color, img: response.data.img }
       console.log(product)
       addProducts(product, dispatch)
       setNewproduct({ title: "", price: "", desc: "", inStock: "" })
@@ -84,11 +96,13 @@ export default function NewProduct() {
         </div>
         <div className="addProductItem">
           <label>Title</label>
-          <input name="title" type="text" value={newproduct.title} placeholder="Apple Airpods" onChange={handleChange} />
+          {/* <input name="title" type="text" value={newproduct.title} placeholder="Apple Airpods" onChange={handleChange} /> */}
+          <textarea name="title" style={{ width: "450px", height: "100px" }} type="text" value={newproduct.title} placeholder="Title of product" onChange={handleTitleChange} />
         </div>
         <div className="addProductItem">
           <label>Description</label>
-          <input name="desc" type="text" value={newproduct.desc} placeholder="Description..." onChange={handleChange} />
+          <textarea name="desc" style={{ width: "450px", height: "100px" }} type="text" value={newproduct.desc} placeholder="Description..." onChange={handleDescriptionChange} />
+          {/* <input name="desc" type="text" value={newproduct.desc} placeholder="Description..." onChange={handleChange} /> */}
         </div>
         <div className="addProductItem">
           <label>Price</label>

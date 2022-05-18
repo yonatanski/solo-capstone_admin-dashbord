@@ -75,7 +75,7 @@ const Login = () => {
     e.preventDefault()
     login(dispatch, { email, password })
     // setAdmin(true)
-    navigate("/")
+    // navigate("/")
   }
   return (
     <Container>
@@ -83,8 +83,8 @@ const Login = () => {
         <Title>ADMIN DASHBOARD</Title>
         <Title>SIGN IN</Title>
         <Form>
-          <Input placeholder="email" onChange={(e) => setEmail(e.target.value)} />
-          <Input placeholder="password" onChange={(e) => setPassword(e.target.value)} />
+          <Input placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Input placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           <Button onClick={handleLogin}>LOGIN</Button>
           {/* {error && <Error>Something went wrong...</Error>} */}
           {/* <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link> */}

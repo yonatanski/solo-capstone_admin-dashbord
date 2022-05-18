@@ -24,17 +24,6 @@
     cursor: pointer;
     margin-right: 20px;
 }
-.productAddButton {
-    width: 80px;
-    border: none;
-    padding: 5px;
-    margin:5px;
-    background-color: teal;
-    color: white;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
 
 .productListDelete{
     color: red;

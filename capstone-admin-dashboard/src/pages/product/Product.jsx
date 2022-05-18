@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { Publish } from "@material-ui/icons"
 import { useEffect, useMemo, useState } from "react"
 import { userRequest } from "../../ReqMethod"
+import { editProducts } from "../../redux/apiCalls"
+import axios from "axios"
 
 export default function Product() {
   const params = useParams()
@@ -32,6 +34,70 @@ export default function Product() {
     getStatus()
   }, [productId, MONTHS])
   console.log(productStatus)
+
+  const [newproduct, setNewproduct] = useState({})
+  const [category, setCategory] = useState([])
+  const [size, setSize] = useState([])
+  const [color, setColor] = useState([])
+  const [image, setImage] = useState("")
+  const dispatch = useDispatch()
+  const TOKEN = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser?.accessToken
+
+  const handleChange = (e) => {
+    setNewproduct((prev) => {
+      return { ...prev, [e.target.name]: e.target.value }
+    })
+  }
+  const handleCategory = (e) => {
+    setCategory(e.target.value.toLowerCase().split(","))
+  }
+  const handleSize = (e) => {
+    setSize(e.target.value.toUpperCase().split(","))
+  }
+  const handleColor = (e) => {
+    setColor(e.target.value.toUpperCase().split(","))
+  }
+  const handleClick = async (e) => {
+    e.preventDefault()
+    const formData = new FormData()
+    for (const key of Object.keys(image)) {
+      formData.append("img", image[key])
+    }
+    console.log("formdata", formData)
+    try {
+      // process.env.REACT_APP_BE_URL
+      // const response = await fetch(`http://localhost:3010/api/products/uploadProductImg`, {
+      //   method: "POST",
+      //   body: formData,
+      // })
+      // if (response.ok) {
+      //   const data = await response.json()
+      //   console.log(data)
+      // }
+      const response = await axios({
+        method: "post",
+        url: "http://localhost:3050/api/products/uploadProductImg",
+        data: formData,
+
+        Headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      console.log(response.data)
+      const product = { ...newproduct, categories: category, size, color, img: response.data.img }
+      console.log(product)
+      editProducts(productId, product, dispatch)
+      setNewproduct({ title: "", price: "", desc: "", inStock: "" })
+      setCategory([])
+      setSize([])
+      setColor([])
+      setImage("")
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  console.log(image)
 
   return (
     <div className="product">
@@ -64,23 +130,42 @@ export default function Product() {
               <span className="productInfoKey">in stock:</span>
               <span className="productInfoValue">{product.inStock ? "Yes" : "NO"}</span>
             </div>
+            <div className="productInfoItem">
+              <span className="productInfoKey">Price:</span>
+              <span className="productInfoValue">{product.price}</span>
+            </div>
+            <div className="productInfoItem">
+              <span className="productInfoKey">Des:</span>
+              <span className="productInfoValue">
+                <small>{product.desc}</small>
+              </span>
+            </div>
           </div>
         </div>
       </div>
       <div className="productBottom">
         <form className="productForm">
           <div className="productFormLeft">
-            <label>Product Name</label>
-            <input type="text" placeholder={product.title} />
+            <label>Product Title</label>
+            <input name="title" type="text" value={newproduct.title} placeholder={product.title} onChange={handleChange} />
 
             <label>Product Description</label>
-            <input type="text" placeholder={product.desc} />
+            <input name="desc" type="text" value={newproduct.desc} placeholder={product.desc} onChange={handleChange} />
 
             <label>Product Price</label>
-            <input type="text" placeholder={product.price} />
+            <input name="price" type="number" value={newproduct.price} placeholder={product.price} onChange={handleChange} />
+
+            <label>Product Categories </label>
+            <input name="categories" type="text" placeholder="jeans,skirts" onChange={handleCategory} />
+
+            <label>Product Size </label>
+            <input name="size" type="text" placeholder="jeans,skirts" onChange={handleSize} />
+
+            <label>Product Color </label>
+            <input name="color" type="text" placeholder="L,S,M.." onChange={handleColor} />
 
             <label>In Stock</label>
-            <select name="inStock" id="idStock">
+            <select name="inStock" id="idStock" onChange={handleChange}>
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
@@ -91,9 +176,11 @@ export default function Product() {
               <label for="file">
                 <Publish />
               </label>
-              <input type="file" id="file" style={{ display: "none" }} />
+              <input name="title" type="file" id="file" multiple onChange={(e) => setImage([image, ...e.target.files])} style={{ display: "none" }} />
             </div>
-            <button className="productButton">Update</button>
+            <button className="productButton" onClick={handleClick}>
+              Update
+            </button>
           </div>
         </form>
       </div>

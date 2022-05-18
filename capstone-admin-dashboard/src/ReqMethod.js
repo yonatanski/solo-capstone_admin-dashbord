@@ -1,8 +1,8 @@
 import axios from "axios"
 
-const BASE_URL = "http://localhost:3010/api/"
+const BASE_URL = "http://localhost:3050/api/"
 
-const TOKEN = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser?.accessToken
+const TOKEN = localStorage.getItem("persist:root") ? JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.user).currentUser?.accessToken : undefined
 
 // const wyeneerreuuu = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).currentUser).User?.isAdmin // true or false
 // const wyeneerreuuu = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).currentUser).accessToken // for token

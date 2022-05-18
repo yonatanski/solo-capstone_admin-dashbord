@@ -20,6 +20,7 @@ export const login = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("/auth/login", user)
     dispatch(loginSuccess(res.data))
+    window.location.assign("/")
   } catch (err) {
     dispatch(loginFailure())
   }
@@ -51,5 +52,14 @@ export const addProducts = async (product, dispatch) => {
     dispatch(addProductSuccess(res.data))
   } catch (err) {
     dispatch(addProductFailure())
+  }
+}
+export const editProducts = async (id, product, dispatch) => {
+  dispatch(updateProductStart())
+  try {
+    const res = await userRequest.put(`/products/${id}`, product)
+    dispatch(updateProductSuccess(res.data))
+  } catch (err) {
+    dispatch(updateProductFailure())
   }
 }

@@ -14,6 +14,8 @@ import Login from "./pages/login/Login"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import Anncoucment from "./pages/Anncoucment/Anncoucment"
+import OrderList from "./pages/orderList/OrderList"
+import OrderDetail from "./pages/orderDetail/OrderDetail"
 
 function App() {
   // const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin
@@ -65,6 +67,9 @@ function App() {
               <Route path="/products" exact element={<ProductList />} />
 
               <Route path="/product/:productId" exact element={<Product />} />
+
+              <Route path="/orders" exact element={<OrderList />} />
+              <Route path="/order/:orderId" exact element={<OrderDetail />} />
 
               <Route path="/newproduct" exact element={<NewProduct />} />
               <Route path="/anncoucnemnt" exact element={<Anncoucment />} />
