@@ -36,7 +36,7 @@ export default function User() {
                 <img src={userDetail?.img} alt="" className="userShowImg" />
                 <div className="userShowTopTitle">
                   <span className="userShowUsername">{userDetail?.username}</span>
-                  <span className="userShowUserTitle">{userDetail?.isAdmin ? "Admin" : "User"}</span>
+                  <span className="userShowUserTitle">{!userDetail?.isAdmin ? "Admin" : "User"}</span>
                 </div>
               </div>
               <div className="userShowBottom">

@@ -47,7 +47,7 @@ export default function UserList() {
       headerName: "Status",
       width: 120,
       renderCell: (params) => {
-        return <>{params.row.isAdmin ? "Admin" : "User"}</>
+        return <>{!params.row.isAdmin ? "Admin" : "User"}</>
       },
     },
     {

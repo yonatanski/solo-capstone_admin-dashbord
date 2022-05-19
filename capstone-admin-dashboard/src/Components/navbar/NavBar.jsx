@@ -22,8 +22,8 @@ export default function NavBar() {
           <div className="topbarIconContainer">
             <Settings />
           </div>
-          <Link to={"/profile/:me" }>
-          <img src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="topAvatar" />
+          <Link to={"/profile/:me"}>
+            <img src="https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif" alt="" className="topAvatar" />
           </Link>
         </div>
       </div>
