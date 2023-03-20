@@ -59,7 +59,7 @@ export default function NewProduct() {
       // }
       const response = await axios({
         method: "post",
-        url: "http://localhost:3050/api/products/uploadProductImg",
+        url: `${process.env.REACT_APP_BE_URL}/api/products/uploadProductImg`,
         data: formData,
 
         Headers: {

@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const BASE_URL = "https://e-commerce-project-api.onrender.com/api"
+const REACT_APP_BE_URL = `${process.env.REACT_APP_BE_URL}/api`
+console.log("url", process.env.REACT_APP_BE_URL)
 
 const TOKEN = localStorage.getItem("persist:root") ? JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.user).currentUser?.accessToken : undefined
 
@@ -15,10 +16,10 @@ console.log("ayii", TOKEN)
 // console.log("Token", TOKEN)
 
 export const publicRequest = axios.create({
-  baseURL: BASE_URL,
+  baseURL: REACT_APP_BE_URL,
 })
 
 export const userRequest = axios.create({
-  baseURL: BASE_URL,
+  baseURL: REACT_APP_BE_URL,
   headers: { Authorization: `Bearer ${TOKEN}` },
 })
